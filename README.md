@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+Data For Action Question Bank
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Built with React and a Supabase instance
 
 ## Available Scripts
 
