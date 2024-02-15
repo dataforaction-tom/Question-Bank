@@ -1,6 +1,6 @@
 /* Color and Global Definitions */
 :root {
-  --primary-color: #5f175c;
+  --primary-color: #5f1725;
   --secondary-color: #37054b;
   --accent-color: #c717a1;
   
@@ -13,14 +13,14 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #201f1f;
+  background-color: #fff;
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 20px;
-  margin: 0;
-  padding: 0;
+  margin: 10;
+  padding: 10;
   color: white;
 }
 
@@ -36,18 +36,18 @@ body {
   font-weight: bold;
   margin-bottom: 2rem;
   position: sticky;
-  top: 0;
+  top: 10;
   z-index: 10;
   left: 0;
   right: 0;
   width: 100%;
-  box-shadow: 0 2px 4px rgba(233, 231, 231, 0.1);
+  box-shadow: 0 2px 4px rgba(250, 250, 250, 0.1);
 }
 
 
 
 .container {
-  background-color: #201f1f;
+  background-color: #427878;
   min-height: 100vh;
   padding: 1rem;
   color: rgb(240, 236, 236);
@@ -169,10 +169,10 @@ body {
 
 .introText {
   font-size: 1 rem;
-  margin-bottom: 2rem;
+  align-items: center;
   text-align: justify;
   width: 80%;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .dropdown {
@@ -274,9 +274,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333; /* Dark background for navbar, can adjust */
+  background-color: #e8e8e8; /* Dark background for navbar, can adjust */
   padding: 15px;
-  color: #fff;
+  color: #7c1184;
+  margin-bottom: 10px;
+  box-shadow: #37054b;
+  border-bottom: #8203bd;
+  
+}
+
+.logo {
+  
 }
 
 .navbar ul {

@@ -7,7 +7,7 @@ import useFormSubmission from './hooks/useFormSubmission';
 import './styles/AppStyles.css';  // Import the CSS file
 import QuestionCards from './QuestionCards';
 import Answers from './components/Answers';
-
+import './styles/tachyons.min.css';  // Import the CSS file
 
 function App() {
     const [question, setQuestion] = useState('');
@@ -80,18 +80,20 @@ const handleonAddAnswerClick = () => {
             onAddQuestionClick={handleAddQuestionClick} 
             onSearchClick={handleonSearchClick} 
             onAddAnswerClick={handleonAddAnswerClick} />
-            <header className="header">Data For Action - Question Bank V2</header>
+            <div className="purple">
+                
+            </div>
             {!activeBlock && (
                 
                 
             <div className="introText">
 
-            <text className="text">Welcome to the Data for Action Question Bank.</text>
+            <text className="h2 purple">Welcome to the Data for Action Question Bank.</text>
                     <br></br>
-                    <text className="basicText">We are using this to understand what questions people have around poverty and the alleviation of poverty in the UK as part of our work with the Joseph Rowntree Foundation Insight Infrastructure project.
+                    <text className="black">We are using this to understand what questions people have around poverty and the alleviation of poverty in the UK as part of our work with the Joseph Rowntree Foundation Insight Infrastructure project.
                                             We are interested in your questions and what actions you think you could take if you were able to answer those questions. This will help us to understand and support development of insight infrastructure with and for the charity/social purpose sector. </text>
                     <br></br>
-                    <text className="basicText">From here you can ADD a question you are interested in being able to answer, SEARCH other questions already submitted, and add a RESOURCE or data that might help answer a specific question </text>
+                    <text className="black">From here you can ADD a question you are interested in being able to answer, SEARCH other questions already submitted, and add a RESOURCE or data that might help answer a specific question </text>
             
                     </div>
             )}

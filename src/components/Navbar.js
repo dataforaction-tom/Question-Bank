@@ -1,12 +1,18 @@
 import React from 'react';
+import logoImage from '../assets/img/DfALogov2.png'
 
 function Navbar({ onHomeClick, onAddQuestionClick, onSearchClick, onAddAnswerClick }) {
     return (
         <div className="navbar">
-            <h2>Data For Action</h2>
+            <div>
+            <img src={logoImage} width="60" height="60"></img>
+        
+            
+            </div>
+            <h2 class="purple">Question Bank</h2>
             
             
-            <ul>
+            <ul class="purple">
         <li onClick={onHomeClick}>Home</li>
         <li onClick={onAddQuestionClick}>Add Question</li>
         <li onClick={onSearchClick}>Search Questions</li>
