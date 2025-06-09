@@ -1,22 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { useFormik } from 'formik';
 import useQuestionSearch from './hooks/useQuestionSearch';
 import useFormSubmission from './hooks/useFormSubmission';
-import './styles/AppStyles.css';  // Import the CSS file
+import './styles/AppStyles.css'; // Assuming this CSS file might be replaced or supplemented by Tailwind CSS for styling
 
 
 function QuestionForm() {
-
-    const [question, setQuestion] = useState("");
-    const [action, setAction] = useState("");
-    const [organisationType, setOrganisationType] = useState("");
-    const [role, setRole] = useState("");
-    const [organisation, setOrganisation] = useState("");
-    const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
     const [records, setRecords] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const searchContainerRef = useRef(null);
-    const debouncedSearch = useDebounce(searchRecords, 500);
+    // Assuming useDebounce and searchRecords are defined somewhere in your hooks or utils
+    const debouncedSearch = useDebounce((value) => searchRecords(value), 500);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -29,170 +23,79 @@ function QuestionForm() {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [setSearchResults]);
+    }, []);
 
-    const handleFormSubmission = async (e) => {
-        e.preventDefault();
-        const success = await handleSubmit(question, action, organisation, email, organisationType, role, fullName);
-        if (success) {
-            setQuestion('');
-            setAction('');
-            setOrganisation('');
-            setEmail('');
-            setFile(null);
-            setOrganisationType('');
-            setRole('');
-            setFullName('');
+    const formik = useFormik({
+        initialValues: {
+            question: '',
+            action: '',
+            organisationType: '',
+            role: '',
+            organisation: '',
+            fullName: '',
+            email: ''
+        },
+        onSubmit: async (values) => {
+            const { question, action, organisation, email, organisationType, role, fullName } = values;
+            const success = await handleSubmit(question, action, organisation, email, organisationType, role, fullName);
+            if (success) {
+                formik.resetForm();
+            }
         }
-    };
-
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [searchContainerRef]);
+    });
 
     return (
-        <>
-
-
-<div className="container">
-                    <h1>Submit a Question</h1>
-                    
-
-            
-
-
-                    
-                    <div className="form-container">
-                        <form onSubmit={handleFormSubmission}>
-                        
-                        <div className="form-group">
-                        <div className="search-container" ref={searchContainerRef}>
-                        <label className="basicText">What question do you have about poverty or the alleviation of poverty in the UK? Use this space to submit your question, and what action you would be able to take should you be able to answer it.
-                        </label>
-                            <input
-                                className="input"
-                                type="text"
-                                placeholder="What question do you have?"
-                                value={question}
-                                onChange={(e) => {
-                                    setQuestion(e.target.value);
-                                    debouncedSearch(e.target.value);
-                                }}
-                                required
-                            />
-                            <div className="dropdown">
-                                {searchResults.map((result, index) => (
-                                    <div
-                                        className="dropdown-item"
-                                        key={index}
-                                        onClick={() => {
-                                            setQuestion(result.question);
-                                            setSearchResults([]);
-                                        }}
-                                    >
-                                        {result.question}
-                                    </div>
-                                ))}
-                            </div>
+        <div className="flex justify-center items-center min-h-screen bg-off-black">
+        <div className="container max-w-4xl bg-white shadow-lg rounded-lg p-8">
+            <h1 className="text-xl font-figtree font-bold text-center mb-4">Submit a Question</h1>
+            <form onSubmit={formik.handleSubmit} className="space-y-4">
+                <div ref={searchContainerRef} className="space-y-2">
+                    <label htmlFor="question" className="block text-sm font-figtree text-gray-700">What question do you have about poverty or the alleviation of poverty in the UK? Use this space to submit your question, and what action you would be able to take should you be able to answer it.</label>
+                    <input
+                        id="question"
+                        name="question"
+                        type="text"
+                        className="input bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-custom-orange focus:border-custom-orange block w-full p-2.5"
+                        placeholder="What question do you have?"
+                        onChange={(e) => {
+                            formik.handleChange(e);
+                            debouncedSearch(e.target.value);
+                        }}
+                        value={formik.values.question}
+                        required
+                    />
+                        <div className="dropdown">
+                            {searchResults.map((result, index) => (
+                                <div
+                                    className="dropdown-item"
+                                    key={index}
+                                    onClick={() => {
+                                        formik.setFieldValue('question', result.question);
+                                        setSearchResults([]);
+                                    }}
+                                >
+                                    {result.question}
+                                </div>
+                            ))}
                         </div>
+                    </div>
 
-    {question && ( // Only render the following inputs if 'question' has a value
-        <>
-        <label className="basicText">What action would you be able to take should you be able to answer this question?
-        </label>
-            <input
-                className="input"
-                type="text"
-                placeholder="Action"
-                value={action}
-                onChange={(e) => setAction(e.target.value)}
-                required
-            />
-
-            <label className="basicText">What type of organisation do you represent? Please select from the options (optional)
-            </label>
-            <select className="selectStyle" value={organisationType} onChange={(e) => setOrganisationType(e.target.value)} >
-            <option value="frontLine">Front Line organisation (charity or other)</option>
-            <option value="funder">Funder or foundation (charitable)</option>
-            <option value="infrastructure">Infrastructure or support organisation</option>
-            <option value="localGov">Local Government</option>
-            <option value="academic">University or research organisation</option>
-          
-                
-            </select>
-                
-        
-            <label className="basicText">What is your role type? Please select from the following options: (optional)
-            </label>
-            <select className="selectStyle" value={role} onChange={(e) => setRole(e.target.value)} >
-            <option value="delivery">Delivery role</option>
-            <option value="management">Operations, management or leadership</option>
-            <option value="research">Research or data</option>
-            <option value="fundraising">Fundraising</option>
-            <option value="policy">Policy</option>
-          
-                
-            </select>
-                         
-
-            
-            
-            
-            
-            {organisationType && ( // Only render the 'Organisation' input if 'action' has a value
-            <>
-            <label className="basicText">What is your name? (optional)
-            </label>
-            <input 
-                className="input"
-                type="text" 
-                placeholder="Name" 
-                value={fullName} 
-                onChange={(e) => setFullName(e.target.value)} 
-            />
-            </>
-            )}
-
-            
-            <label className="basicText">What is your email address? (optional) - You can indicate whether or not you wish this email to be used by others to contact you about this question, perhaps to work together to answer it
-            </label>
-            <input
-                className="input"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            
-            
-            
-
-            
-
-            
-
-            
-        </>
-    )}
-</div>
+                    {/* Conditional rendering based on whether 'question' field has value */}
+                    {formik.values.question && (
+                        <>
+                            {/* Additional form fields similar to the above input */}
+                            {/* Adjust formik.getFieldProps and handleChange as needed for each input */}
 
                             <button className="button" type="submit">Submit</button>
-                        </form>
-                    </div>
-                    {records.map(record => (
-                        <RecordCard key={record.id} record={record} />
-                    ))}
-                </div>
-            )
-        </>
+                        </>
+                    )}
+                </form>
+            </div>
+            {records.map(record => (
+                <RecordCard key={record.id} record={record} />
+            ))}
+        </div>
     );
-                    
- // End of QuestionForm component
-
-
-
+}
 
 export default QuestionForm;

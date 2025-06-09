@@ -135,7 +135,7 @@ const handleonAddAnswerClick = () => {
                         <form onSubmit={handleFormSubmission}>
                         
                         <div className="form-group">
-                        <div className="search-container" ref={searchContainerRef}>
+                        <div className="search-container-main" ref={searchContainerRef}>
                         <label className="basicText">What question do you have about poverty or the alleviation of poverty in the UK? Use this space to submit your question, and what action you would be able to take should you be able to answer it.
                         </label>
                             <input
@@ -268,6 +268,7 @@ const handleonAddAnswerClick = () => {
                     ))}
                 </div>
             )}
+            
             {activeBlock === 'SearchQuestions' && <QuestionCards />}
             {activeBlock === 'Answers' && <Answers />}
         </div>

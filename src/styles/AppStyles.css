@@ -1,4 +1,9 @@
 /* Color and Global Definitions */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
   --primary-color: #5f1725;
   --secondary-color: #37054b;
@@ -145,27 +150,37 @@ body {
   text-align: center;
 }
 
-.card {
-  border: 1px solid white;
-  padding: 1rem;
-  margin-top: 1rem;
-  border-radius: 10px;
-  background-color: var(--secondary-color);
-  color: white;
-  transition: background-color 0.3s;
-}
 
-.card:hover {
-  background-color: var(--accent-color);
-}
 
 .search-container {
 
-  width: 100%;
+  width: 30%;
   margin: 0 auto; /* This will center the container */
   color: white;
+  border-radius: 15px; /* Adjust the pixel value to increase or decrease the roundness */
+  border: 1px solid #ccc; /* Example border, change as needed */
+  padding: 10px; /* Add some padding inside the input */
+  font-size: 16px;
+  display: flex; /* Aligns children (input and button) inline */
+  align-items: center; /* Centers children vertically */
+  gap: 8px; /* Adds space between children */
 }
 
+.search-button {
+  padding: 10px 20px; /* Adjust as needed for the button size */
+  border-radius: 15px; /* Rounded corners */
+  border: none; /* No border */
+  background-color: #113069; /* Blue background */
+  color: white; /* White text */
+  font-size: 16px;
+  cursor: pointer; /* Changes the mouse cursor on hover */
+  outline: none; /* Removes the default focus outline */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.search-button:hover {
+  background-color: #0056b3; /* Slightly darker blue on hover */
+}
 
 .introText {
   font-size: 1 rem;
@@ -274,9 +289,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e8e8e8; /* Dark background for navbar, can adjust */
+  background-color: #113069; /* Dark background for navbar, can adjust */
   padding: 15px;
-  color: #7c1184;
+  color: #ffffff;
   margin-bottom: 10px;
   box-shadow: #37054b;
   border-bottom: #8203bd;
@@ -312,7 +327,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 2fr);  /* Adjust the '3' for desired number of columns */
   gap: 16px;  /* Spacing between cards */
-  background-color: #201f1f;
+  background-color: #ffffff;
   padding-left: 5rem;  /* Adjust as needed */
   padding-right: 5rem; /* Adjust as needed */
       /* ... other styles ... */
@@ -322,17 +337,23 @@ body {
 
 
 .question-card {
-  border: 1px solid white;
-  padding: 1rem;
-  margin-top: 1rem;
-  border-radius: 50px;
-  background-color: var(--secondary-color);
-  color: white;
-  transition: background-color 0.3s;
+  background-color: #ffffff; /* White background for the card */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Adds a subtle shadow to make the card "pop" */
+  transition: 0.3s; /* Transition for hover effect */
+  border-radius: 10px; /* Slightly rounded corners for the card */
+  border: 2px solid transparent;
+  padding: 16px; /* Space inside the card */
+  margin: 16px; /* Space outside the card */
+  display: flex;
+  flex-direction: column; /* Stack the content vertically */
+  justify-content: space-between; /* Distribute space around items */
+  height: 200px; /* Fixed height, but you can make it flexible */
 }
 
 .question-card:hover {
-  background-color: var(--accent-color);
+  
+  cursor: pointer;
+  border-color: #113069;
 }
 
 .questions-page {
@@ -340,17 +361,35 @@ body {
   padding: 2rem;
   padding-left: 10rem;  /* Adjust as needed */
   padding-right: 10rem; /* Adjust as needed */
+  color: #113069;
+}
+
+.question-card .title {
+  font-size: 18px; /* Larger font size for titles */
+  font-weight: bold; /* Make the title bold */
+  margin-bottom: 8px; /* Space below the title */
+}
+
+.question-card .description {
+  font-size: 14px; /* Smaller font size for the description */
+  color: #555; /* Dark grey color for text */
+  margin-bottom: 16px; /* Space below the description */
+}
+
+.question-card .action-button {
+  background-color: #007bff; /* Example primary color for the button */
+  color: white; /* White text on the button */
+  padding: 10px 20px; /* Padding inside the button */
+  text-align: center; /* Center the text inside the button */
+  text-decoration: none; /* Remove underline from links */
+  font-size: 14px; /* Font size for button text */
+  border: none; /* Remove border from button */
+  border-radius: 3px; /* Slightly rounded corners for the button */
+  cursor: pointer; /* Change mouse cursor on hover */
 }
 
 
 
-
-.question-card {
-  padding: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  font-size: 1.5rem; /* Increase font size */
-}
 
 
 

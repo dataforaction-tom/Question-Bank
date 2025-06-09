@@ -30,19 +30,22 @@ function QuestionCards() {
 
     return (
         <div className="questions-page">
-            <div className="search-container">
-                <input
-                    className="search-bar"
-                    type="text"
-                    placeholder="Search for questions..."
-                    onChange={(e) => debouncedSearch(e.target.value)}
-                />
+            
+            <div class="search-container">
+            <input
+                class="search-bar"
+                type="text"
+                placeholder="Search for questions..."
+                onchange="debouncedSearch(this.value)"
+            />
+            <button class="search-button">Search</button>
             </div>
+
             <div className="question-cards-container">
                 {displayedQuestions.map(q => (
                     <div className="question-card" key={q.id} onClick={() => setSelectedQuestion(q)}>
-                        <p><strong>Question:</strong> {q.question}</p>
-                        <p><strong>Organisation:</strong> {q.organisationName}</p>
+                        <p><strong>Question:</strong></p> <p class="title"> {q.question}</p>
+                        <p class="description"><strong>Organisation:</strong> {q.organisationName}</p>
                         {/* Add other details like action, email, etc. if needed */}
                     </div>
                 ))}
